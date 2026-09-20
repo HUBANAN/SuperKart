@@ -89,12 +89,13 @@ demo = gr.Interface(
     fn=predict_sales,
     inputs=[
         gr.Number(label="Product Weight"),
-        gr.Number(label="Product Allocated Area"),
-        gr.Number(label="Product MRP"),
+
         gr.Dropdown(
             ["Low Sugar", "No Sugar", "Regular", "reg"],
             label="Product Sugar Content"
         ),
+
+        gr.Number(label="Product Allocated Area"),
 
         gr.Dropdown(
             [
@@ -116,26 +117,32 @@ demo = gr.Interface(
                 "Starchy Foods"
             ],
             label="Product Type"
-        ),   
-        gr.Number(label="Store Establishment Year"),
-        gr.Dropdown(
-                ["High", "Medium", "Small"],
-                label="Store Size"
         ),
-        gr.Dropdown(
-                ["Tier 1", "Tier 2", "Tier 3"],
-                label="Store Location City Type"
-        ),
-        gr.Dropdown(
-            [
-                "Departmental Store",
-                "Food Mart",
-                "Supermarket Type1",
-                "Supermarket Type2"
-            ],
-                label="Store Type"
-            )
-    ],
+
+    gr.Number(label="Product MRP"),
+
+    gr.Number(label="Store Establishment Year"),
+
+    gr.Dropdown(
+            ["High", "Medium", "Small"],
+            label="Store Size"
+    ),
+
+    gr.Dropdown(
+            ["Tier 1", "Tier 2", "Tier 3"],
+            label="Store Location City Type"
+    ),
+
+    gr.Dropdown(
+        [
+            "Departmental Store",
+            "Food Mart",
+            "Supermarket Type1",
+            "Supermarket Type2"
+        ],
+        label="Store Type"
+    )
+]
 outputs=gr.Textbox(label="Prediction"),
 title="SuperKart Sales Forecasting",
 description="Predict Product Store Sales Total"
