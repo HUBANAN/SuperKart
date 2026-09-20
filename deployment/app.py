@@ -85,7 +85,7 @@ def predict_sales(
     
     return f"Predicted Sales: {round(float(prediction[0]), 2)}"
 
-    demo = gr.Interface(
+demo = gr.Interface(
         fn=predict_sales,
         inputs=[
             gr.Number(label="Product Weight"),
@@ -143,9 +143,9 @@ def predict_sales(
             label="Store Type"
         )
     ],
-outputs=gr.Textbox(label="Prediction"),
-title="SuperKart Sales Forecasting",
-description="Predict Product Store Sales Total"
+    outputs=gr.Textbox(label="Prediction"),
+    title="SuperKart Sales Forecasting",
+    description="Predict Product Store Sales Total"
 )
 
 if __name__ == "__main__":
