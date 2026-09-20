@@ -76,7 +76,7 @@ jobs:
         with:
           python-version: '3.9'
       - name: Install Deployment Dependencies
-        run: pip install -r deployment/requirements.txt
+        run: pip install -r requirements.txt
       - name: Upload Gradio App to Hugging Face Space
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
