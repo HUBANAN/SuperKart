@@ -1,0 +1,87 @@
+name: SuperKart MLOps Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Triggers on push to the main branch
+  workflow_dispatch: {} # Allows manual triggering of the workflow
+
+jobs:
+  register-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install Dependencies
+        run: pip install -r requirements.txt # Assumes requirements.txt is at repo root
+      - name: Register SuperKart Data to Hugging Face Datasets
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          # This step would require a Python script to upload the initial SuperKart.csv
+          # and then process it to create Xtrain, Xtest, ytrain, ytest and upload those
+          # Example: python scripts/register_data.py
+          echo "Placeholder for data registration script execution."
+
+  prepare-data:
+    needs: register-data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+      - name: Prepare Data (Clean, Encode, Split, Upload)
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          # This step would require a Python script to perform data cleaning,
+          # encoding, train/test split, and upload processed data to HF Datasets
+          # Example: python scripts/prepare_data.py
+          echo "Placeholder for data preparation script execution."
+
+  train-model:
+    needs: prepare-data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+      - name: Model Training and Evaluation
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          # This step would require a Python script to download data,
+          # train the model, evaluate, save artifacts, and upload to HF Model Hub
+          # Example: python scripts/train_model.py
+          echo "Placeholder for model training script execution."
+
+  deploy-space:
+    needs: train-model
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install Deployment Dependencies
+        run: pip install -r deployment/requirements.txt
+      - name: Upload Gradio App to Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          # This step would typically involve a script to copy deployment files and then upload the folder.
+          # Example: python scripts/deploy_app.py
+          # For a simple space, the following inline Python command can also be used:
+          python -c "from huggingface_hub import HfApi; from os import getenv; api = HfApi(token=getenv('HF_TOKEN')); api.upload_folder(folder_path='deployment', repo_id='ANNELEARN/SuperKart', repo_type='space')"
