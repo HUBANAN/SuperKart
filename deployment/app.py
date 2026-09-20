@@ -23,17 +23,62 @@ def predict_sales(
     Store_Location_City_Type,
     Store_Type
 ):
-
+ 
+    sugar_map = {
+        "Low Sugar": 0,
+        "No Sugar": 1,
+        "Regular": 2,
+        "reg": 3
+    }
+ 
+    product_type_map = {
+        "Baking Goods": 0,
+        "Breads": 1,
+        "Breakfast": 2,
+        "Canned": 3,
+        "Dairy": 4,
+        "Frozen Foods": 5,
+        "Fruits and Vegetables": 6,
+        "Hard Drinks": 7,
+        "Health and Hygiene": 8,
+        "Household": 9,
+        "Meat": 10,
+        "Others": 11,
+        "Seafood": 12,
+        "Snack Foods": 13,
+        "Soft Drinks": 14,
+        "Starchy Foods": 15
+    }
+ 
+    store_size_map = {
+        "High": 0,
+        "Medium": 1,
+        "Small": 2
+    }
+ 
+    city_map = {
+        "Tier 1": 0,
+        "Tier 2": 1,
+        "Tier 3": 2
+    }
+ 
+    store_type_map = {
+        "Departmental Store": 0,
+        "Food Mart": 1,
+        "Supermarket Type1": 2,
+        "Supermarket Type2": 3
+    }
+ 
     df = pd.DataFrame({
         "Product_Weight": [float(Product_Weight)],
-        "Product_Sugar_Content": [float(Product_Sugar_Content)],
+        "Product_Sugar_Content": [sugar_map[Product_Sugar_Content]],
         "Product_Allocated_Area": [float(Product_Allocated_Area)],
-        "Product_Type": [float(Product_Type)],
+        "Product_Type": [product_type_map[Product_Type]],
         "Product_MRP": [float(Product_MRP)],
         "Store_Establishment_Year": [float(Store_Establishment_Year)],
-        "Store_Size": [float(Store_Size)],
-        "Store_Location_City_Type": [float(Store_Location_City_Type)],
-        "Store_Type": [float(Store_Type)]
+        "Store_Size": [store_size_map[Store_Size]],
+        "Store_Location_City_Type": [city_map[Store_Location_City_Type]],
+        "Store_Type": [store_type_map[Store_Type]]
     })
 
     prediction = model.predict(df)
