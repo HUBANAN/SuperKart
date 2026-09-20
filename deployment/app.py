@@ -23,7 +23,7 @@ def predict_sales(
     Store_Location_City_Type,
     Store_Type
 ):
-
+ 
     df = pd.DataFrame({
         "Product_Weight": [float(Product_Weight)],
         "Product_Sugar_Content": [float(Product_Sugar_Content)],
@@ -34,11 +34,11 @@ def predict_sales(
         "Store_Size": [float(Store_Size)],
         "Store_Location_City_Type": [float(Store_Location_City_Type)],
         "Store_Type": [float(Store_Type)]
-})
-
-prediction = model.predict(df)
-
-return f"Predicted Sales: {round(float(prediction[0]), 2)}"
+    })
+ 
+    prediction = model.predict(df)
+ 
+    return f"Predicted Sales: {round(float(prediction[0]), 2)}"
 
 demo = gr.Interface(
     fn=predict_sales,
