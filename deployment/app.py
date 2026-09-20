@@ -59,4 +59,4 @@ description="Predict Product Store Sales Total"
 )
 
 if __name__ == "__main__":
-demo.launch()
+    demo.launch()
