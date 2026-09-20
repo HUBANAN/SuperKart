@@ -82,12 +82,11 @@ def predict_sales(
     })
     
     prediction = model.predict(df)
-
     return f"Predicted Sales: {round(float(prediction[0]), 2)}"
 
 demo = gr.Interface(
     fn=predict_sales,
-    inputs=[
+   inputs=[
         gr.Number(label="Product Weight"),
 
         gr.Dropdown(
