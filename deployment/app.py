@@ -23,14 +23,14 @@ def predict_sales(
     Store_Location_City_Type,
     Store_Type
 ):
- 
+
     sugar_map = {
         "Low Sugar": 0,
         "No Sugar": 1,
         "Regular": 2,
         "reg": 3
     }
- 
+
     product_type_map = {
         "Baking Goods": 0,
         "Breads": 1,
@@ -49,26 +49,26 @@ def predict_sales(
         "Soft Drinks": 14,
         "Starchy Foods": 15
     }
- 
+
     store_size_map = {
         "High": 0,
         "Medium": 1,
         "Small": 2
     }
- 
+
     city_map = {
         "Tier 1": 0,
         "Tier 2": 1,
         "Tier 3": 2
     }
- 
+
     store_type_map = {
         "Departmental Store": 0,
         "Food Mart": 1,
         "Supermarket Type1": 2,
         "Supermarket Type2": 3
     }
- 
+
     df = pd.DataFrame({
         "Product_Weight": [float(Product_Weight)],
         "Product_Sugar_Content": [sugar_map[Product_Sugar_Content]],
@@ -80,7 +80,7 @@ def predict_sales(
         "Store_Location_City_Type": [city_map[Store_Location_City_Type]],
         "Store_Type": [store_type_map[Store_Type]]
     })
-
+    
     prediction = model.predict(df)
 
     return f"Predicted Sales: {round(float(prediction[0]), 2)}"
