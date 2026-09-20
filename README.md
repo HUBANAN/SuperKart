@@ -22,3 +22,5 @@ This Gradio application predicts Product Store Sales Total using a trained Rando
 ## Model
 
 Random Forest Regressor
+
+
