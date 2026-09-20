@@ -23,7 +23,7 @@ def predict_sales(
     Store_Location_City_Type,
     Store_Type
 ):
- 
+
     df = pd.DataFrame({
         "Product_Weight": [float(Product_Weight)],
         "Product_Sugar_Content": [float(Product_Sugar_Content)],
@@ -35,23 +35,61 @@ def predict_sales(
         "Store_Location_City_Type": [float(Store_Location_City_Type)],
         "Store_Type": [float(Store_Type)]
     })
- 
+
     prediction = model.predict(df)
- 
+
     return f"Predicted Sales: {round(float(prediction[0]), 2)}"
 
 demo = gr.Interface(
     fn=predict_sales,
     inputs=[
         gr.Number(label="Product Weight"),
-        gr.Number(label="Product Sugar Content"),
         gr.Number(label="Product Allocated Area"),
-        gr.Number(label="Product Type"),
         gr.Number(label="Product MRP"),
+        gr.Dropdown(
+            ["Low Sugar", "No Sugar", "Regular", "reg"],
+            label="Product Sugar Content"
+        ),
+
+        gr.Dropdown(
+            [
+                "Baking Goods",
+                "Breads",
+                "Breakfast",
+                "Canned",
+                "Dairy",
+                "Frozen Foods",
+                "Fruits and Vegetables",
+                "Hard Drinks",
+                "Health and Hygiene",
+                "Household",
+                "Meat",
+                "Others",
+                "Seafood",
+                "Snack Foods",
+                "Soft Drinks",
+                "Starchy Foods"
+            ],
+            label="Product Type"
+        ),   
         gr.Number(label="Store Establishment Year"),
-        gr.Number(label="Store Size"),
-        gr.Number(label="Store Location City Type"),
-        gr.Number(label="Store Type")
+        gr.Dropdown(
+                ["High", "Medium", "Small"],
+                label="Store Size"
+        ),
+        gr.Dropdown(
+                ["Tier 1", "Tier 2", "Tier 3"],
+                label="Store Location City Type"
+        ),
+        gr.Dropdown(
+            [
+                "Departmental Store",
+                "Food Mart",
+                "Supermarket Type1",
+                "Supermarket Type2"
+            ],
+                label="Store Type"
+            )
     ],
 outputs=gr.Textbox(label="Prediction"),
 title="SuperKart Sales Forecasting",
