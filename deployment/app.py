@@ -24,16 +24,16 @@ def predict_sales(
     Store_Type
 ):
 
-df = pd.DataFrame({
-    "Product_Weight": [float(Product_Weight)],
-    "Product_Sugar_Content": [float(Product_Sugar_Content)],
-    "Product_Allocated_Area": [float(Product_Allocated_Area)],
-    "Product_Type": [float(Product_Type)],
-    "Product_MRP": [float(Product_MRP)],
-    "Store_Establishment_Year": [float(Store_Establishment_Year)],
-    "Store_Size": [float(Store_Size)],
-    "Store_Location_City_Type": [float(Store_Location_City_Type)],
-    "Store_Type": [float(Store_Type)]
+    df = pd.DataFrame({
+        "Product_Weight": [float(Product_Weight)],
+        "Product_Sugar_Content": [float(Product_Sugar_Content)],
+        "Product_Allocated_Area": [float(Product_Allocated_Area)],
+        "Product_Type": [float(Product_Type)],
+        "Product_MRP": [float(Product_MRP)],
+        "Store_Establishment_Year": [float(Store_Establishment_Year)],
+        "Store_Size": [float(Store_Size)],
+        "Store_Location_City_Type": [float(Store_Location_City_Type)],
+        "Store_Type": [float(Store_Type)]
 })
 
 prediction = model.predict(df)
