@@ -82,66 +82,67 @@ def predict_sales(
     })
     
     prediction = model.predict(df)
+    
     return f"Predicted Sales: {round(float(prediction[0]), 2)}"
 
-demo = gr.Interface(
-    fn=predict_sales,
-   inputs=[
-        gr.Number(label="Product Weight"),
+    demo = gr.Interface(
+        fn=predict_sales,
+        inputs=[
+            gr.Number(label="Product Weight"),
+
+            gr.Dropdown(
+                ["Low Sugar", "No Sugar", "Regular", "reg"],
+                label="Product Sugar Content"
+            ),
+
+            gr.Number(label="Product Allocated Area"),
+
+            gr.Dropdown(
+                [
+                    "Baking Goods",
+                    "Breads",
+                    "Breakfast",
+                    "Canned",
+                    "Dairy",
+                    "Frozen Foods",
+                    "Fruits and Vegetables",
+                    "Hard Drinks",
+                    "Health and Hygiene",
+                    "Household",
+                    "Meat",
+                    "Others",
+                    "Seafood",
+                    "Snack Foods",
+                    "Soft Drinks",
+                    "Starchy Foods"
+                ],
+                label="Product Type"
+            ),
+
+        gr.Number(label="Product MRP"),
+
+        gr.Number(label="Store Establishment Year"),
 
         gr.Dropdown(
-            ["Low Sugar", "No Sugar", "Regular", "reg"],
-            label="Product Sugar Content"
+                ["High", "Medium", "Small"],
+                label="Store Size"
         ),
 
-        gr.Number(label="Product Allocated Area"),
+        gr.Dropdown(
+                ["Tier 1", "Tier 2", "Tier 3"],
+                label="Store Location City Type"
+        ),
 
         gr.Dropdown(
             [
-                "Baking Goods",
-                "Breads",
-                "Breakfast",
-                "Canned",
-                "Dairy",
-                "Frozen Foods",
-                "Fruits and Vegetables",
-                "Hard Drinks",
-                "Health and Hygiene",
-                "Household",
-                "Meat",
-                "Others",
-                "Seafood",
-                "Snack Foods",
-                "Soft Drinks",
-                "Starchy Foods"
+                "Departmental Store",
+                "Food Mart",
+                "Supermarket Type1",
+                "Supermarket Type2"
             ],
-            label="Product Type"
-        ),
-
-    gr.Number(label="Product MRP"),
-
-    gr.Number(label="Store Establishment Year"),
-
-    gr.Dropdown(
-            ["High", "Medium", "Small"],
-            label="Store Size"
-    ),
-
-    gr.Dropdown(
-            ["Tier 1", "Tier 2", "Tier 3"],
-            label="Store Location City Type"
-    ),
-
-    gr.Dropdown(
-        [
-            "Departmental Store",
-            "Food Mart",
-            "Supermarket Type1",
-            "Supermarket Type2"
-        ],
-        label="Store Type"
-    )
-]
+            label="Store Type"
+        )
+    ],
 outputs=gr.Textbox(label="Prediction"),
 title="SuperKart Sales Forecasting",
 description="Predict Product Store Sales Total"
